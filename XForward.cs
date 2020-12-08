@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace ipMicroService
 {
-    public interface IIpReflection
+    public class XForward
     {
-        public XForward GetIp();
+        public string ip { get; set; }
     }
 }

@@ -13,13 +13,17 @@ namespace ipMicroService
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        public string GetIp()
+        public XForward GetIp()
         {
             var headerPairs = _httpContextAccessor.HttpContext.Request.Headers;
             string XForIP = headerPairs["X-Forwarded-For"];
             if (XForIP == null)
                 XForIP = "Null";
-            return XForIP;
+            else
+                XForIP = (XForIP.Split(','))[0];
+            XForward forJson = new XForward() { ip = XForIP };
+            return forJson;
+
         }
     }
 }

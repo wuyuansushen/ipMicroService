@@ -35,8 +35,9 @@ namespace ipMicroService
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    var headersInfo = ipInfo.GetIp();
-                    await context.Response.WriteAsync(headersInfo);
+                    var XForInfo = ipInfo.GetIp();
+                    var jsonOut = JsonSerializer.Serialize<XForward>(XForInfo,options:(new JsonSerializerOptions{WriteIndented=true}));
+                    await context.Response.WriteAsync(jsonOut);
                 });
             });
         }
